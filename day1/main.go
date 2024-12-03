@@ -9,5 +9,6 @@ func main() {
 	// part1.Solve("./sample.txt")
 	part1.Solve("./input.txt")
 
-	part2.Solve("./sample.txt")
+	// part2.Solve("./sample.txt")
+	part2.Solve("./input.txt")
 }

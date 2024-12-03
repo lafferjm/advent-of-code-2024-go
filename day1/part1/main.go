@@ -11,8 +11,8 @@ import (
 )
 
 func Solve(input_file string) {
-	left := []int{}
-	right := []int{}
+	var left []int
+	var right []int
 
 	file, err := os.Open(input_file)
 	if err != nil {

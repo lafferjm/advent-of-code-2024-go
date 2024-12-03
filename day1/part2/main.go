@@ -3,16 +3,14 @@ package part2
 import (
 	"bufio"
 	"fmt"
-	"math"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
 
 func Solve(input_file string) {
-	left := []int{}
-	right := []int{}
+	var left []int
+	var right = make(map[string]int)
 
 	file, err := os.Open(input_file)
 	if err != nil {
@@ -32,31 +30,17 @@ func Solve(input_file string) {
 		}
 		left = append(left, leftValue)
 
-		rightValue, err := strconv.Atoi(values[1])
-		if err != nil {
-			fmt.Println("Failed to convert right value")
-			os.Exit(1)
-		}
-		right = append(right, rightValue)
+		right[values[1]] += 1
 	}
 
 	if err := scanner.Err(); err != nil {
 		fmt.Println(err)
 	}
 
-	sort.Slice(left, func(i, j int) bool {
-		return left[i] < left[j]
-	})
-
-	sort.Slice(right, func(i, j int) bool {
-		return right[i] < right[j]
-	})
-
-	totalDistance := 0
-	for i := 0; i < len(left); i++ {
-		distance := math.Abs(float64(left[i]) - float64(right[i]))
-		totalDistance = totalDistance + int(distance)
+	similarityScore := 0
+	for _, val := range left {
+		similarityScore = similarityScore + (val * right[strconv.Itoa(val)])
 	}
 
-	fmt.Println(totalDistance)
+	fmt.Println(similarityScore)
 }
